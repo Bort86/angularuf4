@@ -1,0 +1,51 @@
+<h2>My Friends</h2>
+<div *ngIf="selectedFriend">
+  <button (click)="gotoDetail()">View details</button>
+</div>
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+      <td>Filter by Age</td>
+      <td>
+        <input type="range" min="0" max="99"
+        [(ngModel)] = "ageFilter" name="ageFilter"
+        (change)="filter()">
+        {{ageFilter}}
+      </td>
+
+    </tr>
+    <tr>
+      <td>Filter by name</td>
+        <td>
+          <input type="text"
+          [(ngModel)] = "nameFilter" name="nameFilter"
+          (keyup)="filter()">
+        </td>
+    </tr>
+
+    <tr>
+      <th>phone</th>
+      <th>name</th>
+      <th>surnames</th>
+      <th>age</th>
+      <th>born date</th>
+      <th>email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let friend of friendsFiltered | paginate: {itemsPerPage: itemsPerPage, currentPage : currentPage}; let i = index;"
+      (click)="onSelect(friend)" [class.selected]="friend === selectedFriend">
+      <td>{{friend.phone}}</td>
+      <td>{{friend.name}}</td>
+      <td>{{friend.surnames}}</td>
+      <td>{{friend.age}}</td>
+      <td>{{friend.bornDate}}</td>
+      <td>{{friend.email}}</td>
+      <span>
+        <button class="delete" (click)="delete(friend); $event.stopPropagation()">x</button>
+      </span>
+    </tr>
+  </tbody>
+</table>
+<pagination-controls (pageChange)="currentPage=$event" max-size="5" directionLinks = "true" autoHide="true"></pagination-controls>

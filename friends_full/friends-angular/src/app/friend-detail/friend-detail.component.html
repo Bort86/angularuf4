@@ -1,0 +1,55 @@
+<h2>Friend detail form</h2>
+<div *ngIf="friend" class="container">
+<form method="post" enctype="application/x-www-form-urlencoded">
+  <div class="form-group row">
+    <label for="phone" class="col-2 col-form-label">Phone</label>
+    <input type="text" class="form-control" id="phone" name="phone" #phone="ngModel"
+    [(ngModel)]="friend.phone" pattern="\d+" placeholder="Enter phone" required>
+    <div class="alert alert-danger" *ngIf="phone.invalid && phone.touched">
+      <span *ngIf="phone.errors.required">Phone can not be empty</span>
+      <span *ngIf="phone.errors.pattern">Phone can only be numbers</span>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="name" class="col-2 col-form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" #name="ngModel"
+    [(ngModel)]="friend.name" pattern="[a-zA-Z]+" required placeholder="Enter name">
+    <div class="alert alert-danger" *ngIf="name.invalid && name.touched">
+      <span *ngIf="name.errors.required">Name can not be empty</span>
+      <span *ngIf="name.errors.pattern">Name can only be letters</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="name" class="col-2 col-form-label">Surnames</label>
+    <input type="text" class="form-control" id="surnames" name="surnames" #surnames="ngModel"
+    [(ngModel)]="friend.surnames" pattern="[a-zA-Z ]+" required placeholder="Enter Surnames">
+    <div class="alert alert-danger" *ngIf="surnames.invalid && surnames.touched">
+      <span *ngIf="surnames.errors.required">Surnames can not be empty</span>
+      <span *ngIf="surnames.errors.pattern">Surnames can only be letters</span>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="name" class="col-2 col-form-label">Date of Birth</label>
+    <input type="text" class="form-control" id="bornDate" name="bornDate"
+    [(ngModel)]="friend.bornDate" placeholder="Enter date of birth" required>
+  </div>
+  <div class="form-group row">
+    <label for="age" class="col-2 col-form-label">Age</label>
+    <input type="number" class="form-control" id="age" name="age" [(ngModel)]="friend.age" placeholder="Enter age">
+  </div>
+
+  <div class="form-group row">
+    <label for="name" class="col-2 col-form-label">Email</label>
+    <input type="text" class="form-control" id="email" name="email" #email="ngModel"
+    [(ngModel)]="friend.email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required placeholder="Enter name">
+    <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
+      <span *ngIf="email.errors.required">Email can not be empty</span>
+      <span *ngIf="email.errors.pattern">Email format error. Example: something@something.com</span>
+    </div>
+  </div>
+  <button (click)="goBack()">Back</button>
+  <button (click)="create()">Create</button>
+  <button (click)="save()">Save</button>
+</form>
+</div>
